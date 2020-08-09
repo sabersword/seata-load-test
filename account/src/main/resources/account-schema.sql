@@ -5,10 +5,11 @@ USE db_account;
 CREATE TABLE `account_tbl`
 (
     `id`      INT(11) NOT NULL AUTO_INCREMENT,
+    `id_default`      INT(11) NOT NULL DEFAULT 0,
     `user_id` VARCHAR(255) DEFAULT NULL,
     `freeze_money` INT(11) DEFAULT 0,
     `money`   INT(11)      DEFAULT 0,
-    PRIMARY KEY (`id`),
+    PRIMARY KEY (`id`, `id_default`),
     UNIQUE KEY `user_id_index` (`user_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

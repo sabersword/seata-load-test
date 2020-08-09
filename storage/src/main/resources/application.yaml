@@ -1,0 +1,75 @@
+server:
+  port: 9771
+spring:
+  application:
+    name: storage-service
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    schema: classpath:storage-schema.sql
+    initialization-mode: always
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-wz90pf1xlo54jshv490210.mysql.rds.aliyuncs.com:3306/db_storage?useSSL=false&serverTimezone=UTC
+    username: ypq
+    password: 1qaz!QAZ
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.18.22.82:8848
+
+seata:
+  enabled: true
+  tx-service-group: defaultTxGroup
+  use-jdk-proxy: false
+  service:
+    disable-global-transaction: false
+    enable-degrade: false
+    vgroup-mapping:
+      defaultTxGroup: defaultTxCluster
+  client:
+    log:
+      exception-rate: 100
+    rm:
+      async-commit-buffer-limit: 1000
+      lock:
+        retry-interval: 100
+        retry-policy-branch-rollback-on-conflict: false
+        retry-times: 30
+      report-retry-count: 5
+      report-success-enable: false
+      table-meta-check-enable: false
+      saga-branch-register-enable: false
+    tm:
+      commit-retry-count: 5
+      rollback-retry-count: 5
+    undo:
+      data-validation: true
+      log-serialization: jackson
+      log-table: undo_log
+  transport:
+    shutdown:
+      wait: 3
+    thread-factory:
+      boss-thread-prefix: NettyBoss
+      worker-thread-prefix: NettyServerNIOWorker
+      server-executor-thread-prefix: NettyServerBizHandler
+      share-boss-worker: false
+      client-selector-thread-prefix: NettyClientSelector
+      client-selector-thread-size: 1
+      client-worker-thread-prefix: NettyClientWorkerThread
+      worker-thread-size: default
+      boss-thread-size: 1
+    type: TCP
+    server: NIO
+    heartbeat: true
+    serialization: seata
+    compressor: none
+    enable-client-batch-send-request: true
+  config:
+    type: file
+  registry:
+    type: nacos
+    nacos:
+      namespace:
+      serverAddr: 172.18.22.82
+      cluster: defaultTxCluster
+

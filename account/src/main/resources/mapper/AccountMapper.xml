@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ypq.persistence.AccountMapper">
+    <resultMap id="BaseResultMap" type="org.ypq.persistence.Account">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="freeze_money" property="freezeMoney" jdbcType="DECIMAL"/>
+        <result column="money" property="money" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        select id, user_id, freeze_money, money from account_tbl
+        WHERE user_id = #{userId} for update
+    </select>
+
+    <update id="updateMoneyById" parameterType="org.ypq.persistence.Account">
+      update account_tbl
+      set money = #{money,jdbcType=DECIMAL}
+      where id = #{id}
+    </update>
+
+    <update id="updateFreezeById" parameterType="org.ypq.persistence.Account">
+      update account_tbl
+      set freeze_money = #{freezeMoney,jdbcType=DECIMAL}
+      where id = #{id}
+    </update>
+
+    <update id="updateFreezeAndMoneyById" parameterType="org.ypq.persistence.Account">
+      update account_tbl
+      set freeze_money = #{freezeMoney,jdbcType=DECIMAL},
+          money = #{money,jdbcType=DECIMAL}
+      where id = #{id}
+    </update>
+
+</mapper>

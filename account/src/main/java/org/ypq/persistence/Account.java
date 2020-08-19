@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 public class Account {
     private Integer id;
 
+    private Integer idDefault;
+
     private String userId;
 
     private BigDecimal freezeMoney;
@@ -41,5 +43,13 @@ public class Account {
 
     public void setMoney(BigDecimal money) {
         this.money = money;
+    }
+
+    public Integer getIdDefault() {
+        return idDefault;
+    }
+
+    public void setIdDefault(Integer idDefault) {
+        this.idDefault = idDefault;
     }
 }

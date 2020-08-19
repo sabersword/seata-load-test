@@ -3,20 +3,22 @@
 <mapper namespace="org.ypq.persistence.AccountMapper">
     <resultMap id="BaseResultMap" type="org.ypq.persistence.Account">
         <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="id_default" property="idDefault" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="VARCHAR"/>
         <result column="freeze_money" property="freezeMoney" jdbcType="DECIMAL"/>
         <result column="money" property="money" jdbcType="DECIMAL"/>
     </resultMap>
 
     <select id="selectByUserId" resultMap="BaseResultMap">
-        select id, user_id, freeze_money, money from account_tbl
+        select id, id_default, user_id, freeze_money, money from account_tbl
         WHERE user_id = #{userId} for update
     </select>
 
     <update id="updateMoneyById" parameterType="org.ypq.persistence.Account">
       update account_tbl
-      set money = #{money,jdbcType=DECIMAL}
-      where id = #{id}
+      set money = #{money,jdbcType=DECIMAL},
+        id_default = 1
+      where id = #{id} and id_default = #{idDefault}
     </update>
 
     <update id="updateFreezeById" parameterType="org.ypq.persistence.Account">

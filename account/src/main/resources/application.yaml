@@ -47,6 +47,7 @@ seata:
       data-validation: true
       log-serialization: jackson
       log-table: undo_log
+      only-care-update-columns: false
   transport:
     shutdown:
       wait: 3

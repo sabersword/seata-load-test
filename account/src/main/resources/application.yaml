@@ -10,13 +10,13 @@ spring:
     druid:
       max-active: 30
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://rm-wz90pf1xlo54jshv490210.mysql.rds.aliyuncs.com:3306/db_account?useSSL=false&serverTimezone=UTC
+      url: jdbc:mysql://rm-wz94e5l6zhh2ca83w90110.mysql.rds.aliyuncs.com:3306/db_account?useSSL=false&serverTimezone=UTC
       username: ypq
-      password: 1qaz!QAZ
+      password: 1qaz@WSX
   cloud:
     nacos:
       discovery:
-        server-addr: 172.18.22.82:8848
+        server-addr: 172.18.1.170:8848
 
 seata:
   enabled: true
@@ -73,6 +73,6 @@ seata:
     type: nacos
     nacos:
       namespace:
-      serverAddr: 172.18.22.82
+      serverAddr: 172.18.1.170
       cluster: defaultTxCluster
 

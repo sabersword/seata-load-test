@@ -11,7 +11,7 @@ spring:
     schema: classpath:storage-schema.sql
     initialization-mode: always
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://rm-wz94e5l6zhh2ca83w90110.mysql.rds.aliyuncs.com:3306/db_storage?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://rm-wz9g644kwoar8ehpa90150.mysql.rds.aliyuncs.com:3306/db_storage?useSSL=false&serverTimezone=UTC
     username: ypq
     password: 1qaz@WSX
   cloud:

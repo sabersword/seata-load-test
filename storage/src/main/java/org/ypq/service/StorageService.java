@@ -1,13 +1,16 @@
 package org.ypq.service;
 
 import io.seata.rm.tcc.api.BusinessActionContext;
+import io.seata.rm.tcc.api.LocalTCC;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.ypq.persistence.Storage;
 import org.ypq.persistence.StorageMapper;
 
-@Component
+//@Component
+@Service
 public class StorageService implements IStorage{
 
     @Autowired
@@ -25,6 +28,7 @@ public class StorageService implements IStorage{
     }
 
     @Override
+    @Transactional
     public boolean prepare(BusinessActionContext actionContext, String commodityCode, int orderCount) {
         Storage storage = storageMapper.findByCommodityCode(commodityCode);
         storage.setFreezeCount(storage.getFreezeCount() + orderCount);
@@ -33,6 +37,7 @@ public class StorageService implements IStorage{
     }
 
     @Override
+    @Transactional
     public boolean commit(BusinessActionContext actionContext) {
         String commodityCode = (String) actionContext.getActionContext("commodityCode");
         int count = (Integer) actionContext.getActionContext("orderCount");
@@ -45,6 +50,7 @@ public class StorageService implements IStorage{
     }
 
     @Override
+    @Transactional
     public boolean rollback(BusinessActionContext actionContext) {
         String commodityCode = (String) actionContext.getActionContext("commodityCode");
         int count = (Integer) actionContext.getActionContext("orderCount");

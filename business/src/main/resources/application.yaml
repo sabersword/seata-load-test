@@ -6,6 +6,10 @@ spring:
       discovery:
         server-addr: 172.18.1.170:8848
 
+dubbo:
+  registry:
+    address: nacos://localhost:8848
+
 server:
   port: 9770
 

@@ -10,12 +10,11 @@ import java.util.Map;
 
 public interface IOrder {
 
-    @TwoPhaseBusinessAction(name = "DubboTccActionTwo", commitMethod = "commit", rollbackMethod = "rollback")
+    @TwoPhaseBusinessAction(name = "orderAction", commitMethod = "commit", rollbackMethod = "rollback")
     public boolean prepare(BusinessActionContext actionContext,
                            @BusinessActionContextParameter(paramName = "userId") String userId,
                            @BusinessActionContextParameter(paramName = "commodityCode") String commodityCode,
-                           @BusinessActionContextParameter(paramName = "orderCount") int orderCount,
-                           @BusinessActionContextParameter(paramName = "orderIdMap") Map<String, Integer> orderIdMap);
+                           @BusinessActionContextParameter(paramName = "orderCount") int orderCount);
 
 
     public boolean commit(BusinessActionContext actionContext);

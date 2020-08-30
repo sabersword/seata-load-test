@@ -11,9 +11,8 @@
     </resultMap>
 
     <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="org.ypq.persistence.Order">
-        insert into order_tbl (user_id,commodity_code,count,money)
-        values (#{userId,jdbcType=VARCHAR}, #{commodityCode,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL})
-
+        insert into order_tbl (user_id,commodity_code,count,money,status)
+        values (#{userId,jdbcType=VARCHAR}, #{commodityCode,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL} ,#{status,jdbcType=VARCHAR})
     </insert>
 
     <update id="updateNormal" parameterType="org.ypq.persistence.Order">

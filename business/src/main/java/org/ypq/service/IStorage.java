@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 public interface IStorage {
 
-    @TwoPhaseBusinessAction(name = "DubboTccActionOne", commitMethod = "commit", rollbackMethod = "rollback")
+    @TwoPhaseBusinessAction(name = "storageAction", commitMethod = "commit", rollbackMethod = "rollback")
     public boolean prepare(BusinessActionContext actionContext,
                            @BusinessActionContextParameter(paramName = "commodityCode") String commodityCode,
                            @BusinessActionContextParameter(paramName = "orderCount") int orderCount);

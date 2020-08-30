@@ -18,6 +18,13 @@ spring:
       discovery:
         server-addr: 172.18.1.170:8848
 
+dubbo:
+  registry:
+    address: nacos://localhost:8848
+  protocol:
+    name: dubbo
+    port: 9775
+
 seata:
   enabled: true
   tx-service-group: defaultTxGroup

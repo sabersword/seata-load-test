@@ -19,14 +19,14 @@
     </update>
 
     <update id="updateFreezeById" parameterType="org.ypq.persistence.Storage">
-        update storage_tbl set count = #{freezeCount,jdbcType=INTEGER}
+        update storage_tbl set freeze_count = #{freezeCount,jdbcType=INTEGER}
         WHERE id = #{id}
     </update>
 
     <update id="updateFreezeAndCountById" parameterType="org.ypq.persistence.Storage">
         update storage_tbl
-        set count = #{freezeCount,jdbcType=INTEGER},
-        set count = #{count,jdbcType=INTEGER}
+        set freeze_count = #{freezeCount,jdbcType=INTEGER},
+            count = #{count,jdbcType=INTEGER}
         WHERE id = #{id}
     </update>
 

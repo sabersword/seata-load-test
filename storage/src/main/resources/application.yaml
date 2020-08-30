@@ -1,3 +1,6 @@
+nacos:
+  ip: 172.18.1.170
+
 server:
   port: 9771
 spring:
@@ -14,11 +17,11 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 172.18.1.170:8848
+        server-addr: ${nacos.ip}:8848
 
 dubbo:
   registry:
-    address: nacos://localhost:8848
+    address: nacos://${nacos.ip}:8848
   protocol:
     name: dubbo
     port: 9774
@@ -77,6 +80,6 @@ seata:
     type: nacos
     nacos:
       namespace:
-      serverAddr: 172.18.1.170
+      serverAddr: ${nacos.ip}
       cluster: defaultTxCluster
 

@@ -1,17 +1,16 @@
 package org.ypq.service;
 
 import io.seata.rm.tcc.api.BusinessActionContext;
-import io.seata.rm.tcc.api.LocalTCC;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.ypq.IStorage;
 import org.ypq.persistence.Storage;
 import org.ypq.persistence.StorageMapper;
 
 //@Component
 @Service
-public class StorageService implements IStorage{
+public class StorageService implements IStorage {
 
     @Autowired
     private StorageMapper storageMapper;

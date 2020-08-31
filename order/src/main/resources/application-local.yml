@@ -1,3 +1,6 @@
+nacos:
+  ip: localhost
+
 server:
   port: 9772
 spring:
@@ -7,13 +10,3 @@ spring:
       url: jdbc:mysql://localhost:3306/db_order?useSSL=false&serverTimezone=UTC
       username: root
       password: root
-
-  cloud:
-    nacos:
-      discovery:
-        server-addr: localhost:8848
-
-seata:
-  registry:
-    nacos:
-      serverAddr: localhost

@@ -1,4 +1,4 @@
-package org.ypq.service;
+package org.ypq;
 
 import io.seata.rm.tcc.api.BusinessActionContext;
 import io.seata.rm.tcc.api.BusinessActionContextParameter;

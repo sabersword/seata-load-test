@@ -1,20 +1,2 @@
-spring:
-  application:
-    name: business-service
-  cloud:
-    nacos:
-      discovery:
-        server-addr: localhost:8848
-  dubbo:
-    application:
-      name: business-service
-    registry: zookeeper://127.0.0.1:2181
-    server: true
-    protocol:
-      name: dubbo
-      prot: 20880
-
-seata:
-  registry:
-    nacos:
-      serverAddr: localhost
+nacos:
+  ip: localhost

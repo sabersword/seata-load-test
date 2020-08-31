@@ -13,7 +13,7 @@ spring:
     druid:
       max-active: 30
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://rm-wz9g644kwoar8ehpa90150.mysql.rds.aliyuncs.com:3306/db_order?useSSL=false&serverTimezone=UTC
+      url: jdbc:mysql://rm-wz99arl4r81002k0690150.mysql.rds.aliyuncs.com:3306/db_order?useSSL=false&serverTimezone=UTC
       username: ypq
       password: 1qaz@WSX
   cloud:
@@ -27,6 +27,7 @@ dubbo:
   protocol:
     name: dubbo
     port: 9775
+    threadpool: 500
 
 seata:
   enabled: true

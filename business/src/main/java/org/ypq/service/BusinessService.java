@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.ypq.IOrder;
+import org.ypq.IStorage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,9 +17,6 @@ public class BusinessService {
 
     @Autowired
     private RestTemplate restTemplate;
-
-    @Autowired
-    private ApplicationContext applicationContext;
 
     @Reference
     private IOrder order;

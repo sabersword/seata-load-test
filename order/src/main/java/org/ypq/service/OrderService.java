@@ -4,13 +4,17 @@ import io.seata.rm.tcc.api.BusinessActionContext;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+import org.ypq.IAccount;
+import org.ypq.IOrder;
 import org.ypq.persistence.Order;
 import org.ypq.persistence.OrderMapper;
 
 import java.math.BigDecimal;
 
+@Component
 @Service
 public class OrderService implements IOrder {
 

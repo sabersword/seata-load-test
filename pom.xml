@@ -22,6 +22,7 @@
     </properties>
 
     <modules>
+        <module>common</module>
         <module>storage</module>
         <module>order</module>
         <module>account</module>

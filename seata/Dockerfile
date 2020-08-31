@@ -1,4 +1,4 @@
-FROM seataio/seata-server:latest
+FROM seataio/seata-server:1.3.0
 
 COPY ./file.conf /seata-server/resources
 COPY ./registry.conf /seata-server/resources

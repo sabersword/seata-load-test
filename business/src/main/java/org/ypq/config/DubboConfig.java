@@ -11,7 +11,6 @@ public class DubboConfig {
     public ConsumerConfig consumerConfig() {
         ConsumerConfig consumerConfig = new ConsumerConfig();
         consumerConfig.setCheck(false);
-        consumerConfig.setTimeout(40000);
         return consumerConfig;
     }
 }

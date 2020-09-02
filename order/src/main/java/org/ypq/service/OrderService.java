@@ -22,7 +22,7 @@ public class OrderService implements IOrder {
     private OrderMapper orderMapper;
     @Autowired
     private RestTemplate restTemplate;
-    @Reference(retries = 0, timeout = 60 * 1000)
+    @Reference(retries = 0, timeout = 1 * 1000)
     private IAccount account;
 
     @Transactional

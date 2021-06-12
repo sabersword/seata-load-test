@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seata-server
+  namespace: default
+  labels:
+    k8s-app: seata-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: seata-server
+  template:
+    metadata:
+      labels:
+        k8s-app: seata-server
+    spec:
+      containers:
+        - name: seata-server
+          image: registry-vpc.cn-shenzhen.aliyuncs.com/org-ypq/seata-offical:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: SEATA_CONFIG_NAME
+              value: file:/root/seata-config/registry
+          ports:
+            - name: http
+              containerPort: 8091
+              protocol: TCP
+          volumeMounts:
+            - name: seata-config
+              mountPath: /root/seata-config
+      volumes:
+        - name: seata-config
+          configMap:
+            name: seata-server-config
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: seata-server-config
+data:
+  registry.conf: |
+    registry {
+      type = "file"
+    }
+    config {
+      type = "file"
+      file {
+          name = "file.conf"
+      }
+    }
+
+  file.conf: |
+    store {
+      mode = "db"
+      db {
+        datasource = "druid"
+        dbType = "mysql"
+        driverClassName = "com.mysql.cj.jdbc.Driver"
+        url = "jdbc:mysql://rm-wz9n3086es0tq246n.mysql.rds.aliyuncs.com:3306/seata"
+        user = "ypq"
+        password = "1qaz@WSX"
+        minConn = 5
+        maxConn = 30
+        globalTable = "global_table"
+        branchTable = "branch_table"
+        lockTable = "lock_table"
+        queryLimit = 100
+        maxWait = 5000
+      }
+    }

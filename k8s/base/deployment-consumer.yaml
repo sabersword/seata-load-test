@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-new
+  namespace: default
+  labels:
+    k8s-app: consumer-new
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: consumer-new
+  template:
+    metadata:
+      labels:
+        k8s-app: consumer-new
+    #      annotations:
+    #        k8s.aliyun.com/eci-use-specs: "1-2Gi"
+    spec:
+      containers:
+        - name: consumer-new
+          image: REGISTRY/NAMESPACE/IMAGE:TAG
+          imagePullPolicy: Always
+          ports:
+            - name: consumer-port
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              cpu: "0.25"
+              memory: "0.5Gi"
+            limits:
+              cpu: "0.25"
+              memory: "0.5Gi"
+          env:
+            ######### 配置 环境变量 命名格式为 aliyun_logs_${logstore名字}_${参数}###########
+            ######### 配置 project，如果使用k8s集群默认的project可以不填 ###########
+            - name: aliyun_logs_consumer-stdout_project
+              value: k8s-log-sls
+            ######### 配置 机器组，如果使用k8s集群默认的project下的默认机器组可以不填 ###########
+            #            - name: aliyun_logs_provider-stdout_machinegroup
+            #              value: k8s-group-app-alpine
+            ######### 设置标准输出和错误输出的logstore consumer-stdout###########
+            - name: aliyun_logs_consumer-stdout
+              value: stdout
+            ######### 日志保留时间，只对单个logstore生效 ###########
+            - name: aliyun_logs_consumer-stdout_ttl
+              value: "1"
+            ######### 日志分区数，只对单个logstore生效 ###########
+            - name: aliyun_logs_consumer-stdout_shard
+              value: "1"
+              # 挂载NAS
+#          volumeMounts:
+#            - name: nas-pvc
+#              mountPath: "/data"
+#      volumes:
+#        - name: nas-pvc
+#          persistentVolumeClaim:
+#            claimName: ypq-nas-pvc

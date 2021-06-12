@@ -25,9 +25,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build image
-        run: |
-          docker -v
 
       # 3.1 Set ACK context
       - name: Set K8s context
@@ -45,7 +42,6 @@ jobs:
       - name: Deploy
         run: |-
           cd $KUSTOMIZATION_PATH
-          ./kustomize edit set image REGISTRY/NAMESPACE/IMAGE:TAG=$REGISTRY_VPC/$NAMESPACE/$IMAGE:$TAG
           kubectl apply -k .
           kubectl rollout status deployment/$ACK_DEPLOYMENT_NAME
           kubectl get services -o wide

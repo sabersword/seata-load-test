@@ -35,7 +35,7 @@ jobs:
           cluster-id: "${{ env.ACK_CLUSTER_ID }}"
 
       - name: Test Kubectl
-        run: kubectl version
+        run: kubectl get services
 
       # 3.2 Deploy the image to the ACK cluster
       - name: Set up Kustomize

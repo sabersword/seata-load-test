@@ -24,6 +24,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      - name: Build image
+        run: |
+          docker -v
+
       # 3.1 Set ACK context
       - name: Set K8s context
         uses: aliyun/ack-set-context@v1

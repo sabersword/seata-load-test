@@ -17,7 +17,7 @@ env:
   IMAGE: seata-offical
   TAG: 1.4.2
   ACK_CLUSTER_ID: c50b00c0f1dfe47718f6cc8c08bf068bc
-  ACK_DEPLOYMENT_NAME: seata
+  ACK_DEPLOYMENT_NAME: seata-server
   KUSTOMIZATION_PATH: k8s/base
 
 jobs:
@@ -28,14 +28,11 @@ jobs:
 
       # 3.1 Set ACK context
       - name: Set K8s context
-        uses: aliyun/ack-set-context@v1.0.2
+        uses: aliyun/ack-set-context@v1
         with:
           access-key-id: "${{ secrets.ACCESS_KEY_ID }}"
           access-key-secret: "${{ secrets.ACCESS_KEY_SECRET }}"
           cluster-id: "${{ env.ACK_CLUSTER_ID }}"
-
-      - name: Test Kubectl
-        run: kubectl get services
 
       # 3.2 Deploy the image to the ACK cluster
       - name: Set up Kustomize
@@ -45,6 +42,7 @@ jobs:
       - name: Deploy
         run: |-
           cd $KUSTOMIZATION_PATH
+          ./kustomize edit set image REGISTRY/NAMESPACE/IMAGE:TAG=$REGISTRY_VPC/$NAMESPACE/$IMAGE:$TAG
           kubectl apply -k .
           kubectl rollout status deployment/$ACK_DEPLOYMENT_NAME
           kubectl get services -o wide

@@ -22,9 +22,8 @@ COPY ./ $WORK_PATH
 #将准备好的repository文件夹复制进来，这样相当于镜像环境中已经有了java工程所需的jar，可以避免去maven中央仓库下载
 # COPY ./repository /root/.m2/repository
 
-COPY settings.xml /usr/share/maven/ref/
 #编译构建
-RUN cd $WORK_PATH && mvn -s /usr/share/maven/ref/settings.xml clean package
+RUN cd $WORK_PATH && mvn clean package
 
 ### 第二阶段，用第一阶段的jar和jre镜像合成一个小体积的镜像
 FROM java:8-jre-alpine

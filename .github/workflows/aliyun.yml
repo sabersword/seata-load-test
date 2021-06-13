@@ -16,7 +16,7 @@ env:
   NAMESPACE: org-ypq
   IMAGE: seata-offical
   TAG: 1.4.2
-  ACK_CLUSTER_ID: c50b00c0f1dfe47718f6cc8c08bf068bc
+  ACK_CLUSTER_ID: ced2c8444b1c545238ec67c063287c73d
   ACK_DEPLOYMENT_NAME: seata-server
   KUSTOMIZATION_PATH: k8s/base
 

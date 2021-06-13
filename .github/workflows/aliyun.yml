@@ -5,9 +5,9 @@ name: build & push image, kustomize to aliyun ack
 
 on:
   push:
-    branches: [ master ]
+    branches: [ at-k8s ]
   pull_request:
-    branches: [ master ]
+    branches: [ at-k8s ]
 
 env:
   REGION_ID: cn-shenzhen

@@ -1,12 +1,11 @@
-nacos:
-  ip: localhost
-
 server:
   port: 9772
 spring:
   datasource:
-    initialization-mode: never
     druid:
       url: jdbc:mysql://localhost:3306/db_order?useSSL=false&serverTimezone=UTC
       username: root
       password: root
+  sql:
+    init:
+      mode: always

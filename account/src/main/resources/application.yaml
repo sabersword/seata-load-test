@@ -1,4 +1,3 @@
-
 server:
   port: 9773
 spring:
@@ -6,26 +5,28 @@ spring:
     name: account-service
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    schema: classpath:account-schema.sql
-    initialization-mode: always
     druid:
       max-active: 30
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://rm-wz9n3086es0tq246neo.mysql.rds.aliyuncs.com:3306/db_account?useSSL=false&serverTimezone=UTC
       username: ypq
       password: 1qaz@WSX
+  sql:
+    init:
+      schema-locations: classpath:account-schema.sql
+      mode: always
 
 seata:
   enabled: true
-  tx-service-group: defaultTxGroup
+  tx-service-group: loadTestGroup
   use-jdk-proxy: false
   service:
     disable-global-transaction: false
     enable-degrade: false
     vgroup-mapping:
-      defaultTxGroup: defaultTxCluster
+      loadTestGroup: loadTestCluster
     grouplist:
-      defaultTxCluster: 127.0.0.1
+      loadTestCluster: seata-server:8091
   log:
     exception-rate: 100
   client:

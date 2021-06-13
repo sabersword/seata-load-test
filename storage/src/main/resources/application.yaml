@@ -1,6 +1,3 @@
-nacos:
-  ip: 172.18.1.170
-
 server:
   port: 9771
 spring:
@@ -8,8 +5,6 @@ spring:
     name: storage-service
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    schema: classpath:storage-schema.sql
-    initialization-mode: always
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://rm-wz9d5704zvfboq0sy125010.mysql.rds.aliyuncs.com:3306/db_storage?useSSL=false&serverTimezone=UTC
     username: ypq
@@ -18,27 +13,25 @@ spring:
     nacos:
       discovery:
         server-addr: ${nacos.ip}:8848
-
-dubbo:
-  registry:
-    address: nacos://${nacos.ip}:8848
-  protocol:
-    name: dubbo
-    port: 9774
-    thread: 500
+  sql:
+    init:
+      schema-locations: classpath:storage-schema.sql
+      mode: always
 
 seata:
   enabled: true
-  tx-service-group: defaultTxGroup
+  tx-service-group: loadTestGroup
   use-jdk-proxy: false
   service:
     disable-global-transaction: false
     enable-degrade: false
     vgroup-mapping:
-      defaultTxGroup: defaultTxCluster
+      loadTestGroup: loadTestCluster
+    grouplist:
+      loadTestCluster: seata-server:8091
+  log:
+    exception-rate: 100
   client:
-    log:
-      exception-rate: 100
     rm:
       async-commit-buffer-limit: 1000
       lock:
@@ -78,9 +71,4 @@ seata:
   config:
     type: file
   registry:
-    type: nacos
-    nacos:
-      namespace:
-      serverAddr: ${nacos.ip}
-      cluster: defaultTxCluster
-
+    type: file

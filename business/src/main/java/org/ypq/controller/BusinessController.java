@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.ypq.service.BusinessService;
 
+/**
+ * 全局事务发起
+ * @author ypq
+ */
 @RestController
 public class BusinessController {
 
@@ -24,19 +28,6 @@ public class BusinessController {
         LOGGER.info("purchaseAT begin ... xid: " + RootContext.getXID());
         try {
             return businessService.purchase(userId, commodityCode, orderCount);
-        } catch (Exception e) {
-            return e.getMessage();
-        }
-    }
-
-    /**
-     * 减库存，下订单
-     */
-    @GetMapping(value = "/businessTCC")
-    public String purchaseTCC(String userId, String commodityCode, int orderCount) {
-        LOGGER.info("purchaseAT begin ... xid: " + RootContext.getXID());
-        try {
-            return businessService.purchaseTCC(userId, commodityCode, orderCount);
         } catch (Exception e) {
             return e.getMessage();
         }

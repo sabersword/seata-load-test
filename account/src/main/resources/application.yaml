@@ -1,5 +1,3 @@
-nacos:
-  ip: 172.18.1.170
 
 server:
   port: 9773
@@ -13,21 +11,9 @@ spring:
     druid:
       max-active: 30
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://rm-wz9d5704zvfboq0sy125010.mysql.rds.aliyuncs.com:3306/db_account?useSSL=false&serverTimezone=UTC
+      url: jdbc:mysql://rm-wz9n3086es0tq246neo.mysql.rds.aliyuncs.com:3306/db_account?useSSL=false&serverTimezone=UTC
       username: ypq
       password: 1qaz@WSX
-  cloud:
-    nacos:
-      discovery:
-        server-addr: ${nacos.ip}:8848
-
-dubbo:
-  registry:
-    address: nacos://${nacos.ip}:8848
-  protocol:
-    name: dubbo
-    port: 9776
-    threads: 500
 
 seata:
   enabled: true
@@ -38,9 +24,11 @@ seata:
     enable-degrade: false
     vgroup-mapping:
       defaultTxGroup: defaultTxCluster
+    grouplist:
+      defaultTxCluster: 127.0.0.1
+  log:
+    exception-rate: 100
   client:
-    log:
-      exception-rate: 100
     rm:
       async-commit-buffer-limit: 1000
       lock:
@@ -81,9 +69,5 @@ seata:
   config:
     type: file
   registry:
-    type: nacos
-    nacos:
-      namespace:
-      serverAddr: ${nacos.ip}
-      cluster: defaultTxCluster
+    type: file
 

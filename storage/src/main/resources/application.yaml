@@ -9,10 +9,6 @@ spring:
     url: jdbc:mysql://rm-wz9d5704zvfboq0sy125010.mysql.rds.aliyuncs.com:3306/db_storage?useSSL=false&serverTimezone=UTC
     username: ypq
     password: 1qaz@WSX
-  cloud:
-    nacos:
-      discovery:
-        server-addr: ${nacos.ip}:8848
   sql:
     init:
       schema-locations: classpath:storage-schema.sql

@@ -1,2 +1,6 @@
 resources:
   - seata.yaml
+  - account.yaml
+  - business.yaml
+  - order.yaml
+  - storage.yaml

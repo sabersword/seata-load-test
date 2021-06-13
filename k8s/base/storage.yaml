@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storage
+  namespace: default
+  labels:
+    k8s-app: storage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: storage
+  template:
+    metadata:
+      labels:
+        k8s-app: storage
+    spec:
+      containers:
+        - name: storage
+          image: registry-vpc.cn-shenzhen.aliyuncs.com/org-ypq/storage:0.1-SNAPSHOT
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 9770
+              protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: storage-service
+  namespace: default
+  labels:
+    k8s-app: storage-service
+spec:
+  type: ClusterIP
+  #  可选NodePort,下面也能指定nodePort=30000~32676
+  #  type: NodePort
+  ports:
+    - port: 9770
+      targetPort: 9770
+      #      nodePort: 30000
+      name: storage
+  selector:
+    k8s-app: storage

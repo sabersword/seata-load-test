@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account
+  namespace: default
+  labels:
+    k8s-app: account
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: account
+  template:
+    metadata:
+      labels:
+        k8s-app: account
+    spec:
+      containers:
+        - name: account
+          image: registry-vpc.cn-shenzhen.aliyuncs.com/org-ypq/account:0.1-SNAPSHOT
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 9773
+              protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: account-service
+  namespace: default
+  labels:
+    k8s-app: account-service
+spec:
+  type: ClusterIP
+  #  可选NodePort,下面也能指定nodePort=30000~32676
+  #  type: NodePort
+  ports:
+    - port: 9773
+      targetPort: 9773
+      #      nodePort: 30000
+      name: account
+  selector:
+    k8s-app: account

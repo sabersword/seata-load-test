@@ -14,35 +14,61 @@ env:
   REGISTRY: registry.cn-shenzhen.aliyuncs.com
   REGISTRY_VPC: registry-vpc.cn-shenzhen.aliyuncs.com
   NAMESPACE: org-ypq
-  IMAGE: seata-offical
-  TAG: 1.4.2
+  TAG: 0.1-SNAPSHOT
   ACK_CLUSTER_ID: ced2c8444b1c545238ec67c063287c73d
-  ACK_DEPLOYMENT_NAME: seata-server
+  ACK_DEPLOYMENT_NAME: account
   KUSTOMIZATION_PATH: k8s/base
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # 1.1 checkout
+      - name: checkout source code
       - uses: actions/checkout@v2
 
-      # 3.1 Set ACK context
-      - name: Set K8s context
+      # 1.2 build image
+      - name: build image
+        run: |
+          docker build -f account.dockerfile --tag "$REGISTRY/$NAMESPACE/account:$TAG" .
+          docker build -f business.dockerfile --tag "$REGISTRY/$NAMESPACE/business:$TAG" .
+          docker build -f order.dockerfile --tag "$REGISTRY/$NAMESPACE/order:$TAG" .
+          docker build -f storage.dockerfile --tag "$REGISTRY/$NAMESPACE/storage:$TAG" .
+
+      # 1.3 login to ACR
+      - name: login to ACR
+        uses: aliyun/acr-login@v1
+        with:
+          region-id: "${{ env.REGION_ID }}"
+          access-key-id: "${{ secrets.ACCESS_KEY_ID }}"
+          access-key-secret: "${{ secrets.ACCESS_KEY_SECRET }}"
+
+      # 1.4 push image to ACR
+      - name: push image to ACR
+        run: |
+          docker push "$REGISTRY/$NAMESPACE/account:$TAG"
+          docker push "$REGISTRY/$NAMESPACE/business:$TAG"
+          docker push "$REGISTRY/$NAMESPACE/order:$TAG"
+          docker push "$REGISTRY/$NAMESPACE/storage:$TAG"
+
+      # 3.1 set ACK context
+      - name: set ACK context
         uses: aliyun/ack-set-context@v1
         with:
           access-key-id: "${{ secrets.ACCESS_KEY_ID }}"
           access-key-secret: "${{ secrets.ACCESS_KEY_SECRET }}"
           cluster-id: "${{ env.ACK_CLUSTER_ID }}"
 
-      # 3.2 Deploy the image to the ACK cluster
-      - name: Set up Kustomize
+      # 3.2 set up kustomize
+      - name: set up kustomize
         run: |-
           cd $KUSTOMIZATION_PATH
           curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash /dev/stdin 3.8.6
-      - name: Deploy
+
+      # 3.3 deploy the image to the ACK cluster
+      - name: deploy the image to the ACK cluster
         run: |-
           cd $KUSTOMIZATION_PATH
-          ./kustomize edit set image REGISTRY/NAMESPACE/IMAGE:TAG=$REGISTRY_VPC/$NAMESPACE/$IMAGE:$TAG
           kubectl apply -k .
           kubectl rollout status deployment/$ACK_DEPLOYMENT_NAME
           kubectl get services -o wide

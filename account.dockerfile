@@ -48,4 +48,4 @@ WORKDIR /root
 COPY --from=compile_stage $WORK_PATH/${PROJECT_NAME}/target/${PROJECT_NAME}-${PROJECT_VERSION}.jar .
 
 #启动应用
-CMD ["sh", "-c", "java -server -Xmx2048m -Xms2048m -Xmn1024m -Xss512k -XX:+UnlockExperimentalVMOptions -XX:SurvivorRatio=10 -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -XX:MaxDirectMemorySize=1024m -XX:-OmitStackTraceInFastThrow -XX:-UseAdaptiveSizePolicy -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/var/log/heapdump.hprof -XX:+DisableExplicitGC -XX:+CMSParallelRemarkEnabled -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=75 -jar /root/${PROJECT_NAME}-${PROJECT_VERSION}.jar"]
+CMD ["sh", "-c", "java -server -Xmx2048m -Xms2048m -Xss512k -XX:+UnlockExperimentalVMOptions -XX:SurvivorRatio=10 -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -XX:MaxDirectMemorySize=1024m -XX:-OmitStackTraceInFastThrow -XX:-UseAdaptiveSizePolicy -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/var/log/heapdump.hprof -XX:+DisableExplicitGC -XX:+CMSParallelRemarkEnabled -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=75 -jar /root/${PROJECT_NAME}-${PROJECT_VERSION}.jar"]

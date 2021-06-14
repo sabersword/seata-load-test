@@ -23,7 +23,13 @@ spec:
             - name: http
               containerPort: 9773
               protocol: TCP
-
+          resources:
+            requests:
+              cpu: "0.5"
+              memory: "1Gi"
+            limits:
+              cpu: "0.5"
+              memory: "1Gi"
 ---
 apiVersion: v1
 kind: Service

@@ -26,6 +26,13 @@ spec:
             - name: http
               containerPort: 8091
               protocol: TCP
+          resources:
+            requests:
+              cpu: "0.5"
+              memory: "1Gi"
+            limits:
+              cpu: "0.5"
+              memory: "1Gi"
           volumeMounts:
             - name: seata-config
               mountPath: /root/seata-config

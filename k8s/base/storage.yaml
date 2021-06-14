@@ -21,7 +21,7 @@ spec:
           imagePullPolicy: Always
           ports:
             - name: http
-              containerPort: 9770
+              containerPort: 9771
               protocol: TCP
           resources:
             requests:
@@ -43,8 +43,8 @@ spec:
   #  可选NodePort,下面也能指定nodePort=30000~32676
   #  type: NodePort
   ports:
-    - port: 9770
-      targetPort: 9770
+    - port: 9771
+      targetPort: 9771
       #      nodePort: 30000
       name: storage
   selector:

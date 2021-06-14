@@ -29,7 +29,7 @@ RUN cd $WORK_PATH && mvn clean package
 
 # java:8-jre-alpine 体积更小,但没有curl等命令
 # openjdk较java:8-jre-alpine体积要大
-FROM java:8-jre-alpine
+FROM openjdk:8-jre
 
 ####################定义环境变量 start####################
 #定义工程名称，也是源文件的文件夹名称

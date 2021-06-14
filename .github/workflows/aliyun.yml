@@ -15,7 +15,7 @@ env:
   REGISTRY_VPC: registry-vpc.cn-shenzhen.aliyuncs.com
   NAMESPACE: org-ypq
   TAG: 0.1-SNAPSHOT
-  ACK_CLUSTER_ID: c33e06cabff7f46c3a7b3a9316d09b4cd
+  ACK_CLUSTER_ID: cf158b7d2c27947e5a80b527c224eaa16
   ACK_DEPLOYMENT_NAME: account
   KUSTOMIZATION_PATH: k8s/base
 

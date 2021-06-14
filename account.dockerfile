@@ -27,7 +27,7 @@ RUN cd $WORK_PATH && mvn clean package
 
 ### 第二阶段，用第一阶段的jar和jre镜像合成一个小体积的镜像
 
-# FROM java:8-jre-alpine 体积更小,但没有curl等命令
+# java:8-jre-alpine 体积更小,但没有curl等命令
 # openjdk较java:8-jre-alpine体积要大
 FROM java:8-jre-alpine
 

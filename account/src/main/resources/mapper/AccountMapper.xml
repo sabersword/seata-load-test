@@ -17,7 +17,7 @@
     <update id="updateMoneyById" parameterType="org.ypq.persistence.Account">
       update account_tbl
       set money = #{money,jdbcType=DECIMAL},
-        id_default = 1
+        id_default = #{idDefault}
       where id = #{id} and id_default = #{idDefault}
     </update>
 

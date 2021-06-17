@@ -6,7 +6,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://rm-wz9n3086es0tq246n.mysql.rds.aliyuncs.com:3306/db_storage?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://rm-wz9s07o893mj45q83.mysql.rds.aliyuncs.com:3306/db_storage?useSSL=false&serverTimezone=UTC
     username: ypq
     password: 1qaz@WSX
   sql:

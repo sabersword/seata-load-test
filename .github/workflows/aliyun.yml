@@ -44,12 +44,12 @@ jobs:
           access-key-secret: "${{ secrets.ACCESS_KEY_SECRET }}"
 
       # 1.4 push image to ACR
-      - name: push image to ACR
-        run: |
-          docker push "$REGISTRY/$NAMESPACE/account:$TAG"
-          docker push "$REGISTRY/$NAMESPACE/business:$TAG"
-          docker push "$REGISTRY/$NAMESPACE/order:$TAG"
-          docker push "$REGISTRY/$NAMESPACE/storage:$TAG"
+#      - name: push image to ACR
+#        run: |
+#          docker push "$REGISTRY/$NAMESPACE/account:$TAG"
+#          docker push "$REGISTRY/$NAMESPACE/business:$TAG"
+#          docker push "$REGISTRY/$NAMESPACE/order:$TAG"
+#          docker push "$REGISTRY/$NAMESPACE/storage:$TAG"
 
       # 3.1 set ACK context
       - name: set ACK context

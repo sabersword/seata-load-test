@@ -28,8 +28,8 @@ spec:
               cpu: "0.25"
               memory: "0.5Gi"
             limits:
-              cpu: "0.5"
-              memory: "1Gi"
+              cpu: "1"
+              memory: "2Gi"
 ---
 apiVersion: v1
 kind: Service
@@ -39,13 +39,13 @@ metadata:
   labels:
     k8s-app: business-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   #  可选NodePort,下面也能指定nodePort=30000~32676
   #  type: NodePort
   ports:
     - port: 9770
       targetPort: 9770
-      nodePort: 30000
+#      nodePort: 30000
       name: business
   selector:
     k8s-app: business

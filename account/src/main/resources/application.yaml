@@ -8,7 +8,7 @@ spring:
     druid:
       max-active: 30
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://rm-wz9ykl7hk4c5tjf40.mysql.rds.aliyuncs.com:3306/db_account?useSSL=false&serverTimezone=UTC
+      url: jdbc:mysql://rm-wz975vqf3b8m55y3q.mysql.rds.aliyuncs.com:3306/db_account?useSSL=false&serverTimezone=UTC
       username: ypq
       password: 1qaz@WSX
   sql:

@@ -6,7 +6,7 @@ metadata:
   labels:
     k8s-app: seata-server
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       k8s-app: seata-server
@@ -47,8 +47,8 @@ spec:
               cpu: "0.25"
               memory: "0.5Gi"
             limits:
-              cpu: "1"
-              memory: "2Gi"
+              cpu: "2"
+              memory: "4Gi"
           volumeMounts:
             - name: seata-config
               mountPath: /root/seata-config
@@ -81,7 +81,7 @@ data:
         datasource = "druid"
         dbType = "mysql"
         driverClassName = "com.mysql.cj.jdbc.Driver"
-        url = "jdbc:mysql://rm-wz9ykl7hk4c5tjf40.mysql.rds.aliyuncs.com:3306/seata"
+        url = "jdbc:mysql://rm-wz9g7xh3923btlok1.mysql.rds.aliyuncs.com:3306/seata"
         user = "ypq"
         password = "1qaz@WSX"
         minConn = 5

@@ -6,7 +6,7 @@ metadata:
   labels:
     k8s-app: account
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       k8s-app: account
@@ -28,8 +28,8 @@ spec:
               cpu: "0.25"
               memory: "0.5Gi"
             limits:
-              cpu: "1"
-              memory: "2Gi"
+              cpu: "2"
+              memory: "4Gi"
           env:
             ######### 配置 环境变量 命名格式为 aliyun_logs_${logstore名字}_${参数}###########
             ######### 配置 project，如果使用k8s集群默认的project可以不填 ###########

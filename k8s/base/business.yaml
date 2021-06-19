@@ -30,10 +30,29 @@ spec:
             limits:
               cpu: "1"
               memory: "2Gi"
+          env:
+            ######### 配置 环境变量 命名格式为 aliyun_logs_${logstore名字}_${参数}###########
+            ######### 配置 project，如果使用k8s集群默认的project可以不填 ###########
+            - name: aliyun_logs_account-stdout_project
+              value: k8s-log-sls
+            ######### 配置 机器组，如果使用k8s集群默认的project下的默认机器组可以不填 ###########
+            # - name: aliyun_logs_provider-stdout_machinegroup
+            #   value: k8s-group-app-alpine
+            ######### 设置标准输出和错误输出的logstore provider-stdout###########
+            - name: aliyun_logs_account-stdout
+              value: stdout
+            ######### 日志保留时间，只对单个logstore生效 ###########
+            - name: aliyun_logs_account-stdout_ttl
+              value: "1"
+            ######### 日志分区数，只对单个logstore生效 ###########
+            - name: aliyun_logs_account-stdout_shard
+              value: "1"
 ---
 apiVersion: v1
 kind: Service
 metadata:
+  annotations:
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: "slb.s1.small"
   name: business-service
   namespace: default
   labels:

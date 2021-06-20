@@ -30,13 +30,13 @@ spec:
             # - name: aliyun_logs_provider-stdout_machinegroup
             #   value: k8s-group-app-alpine
             ######### 设置标准输出和错误输出的logstore provider-stdout###########
-            - name: aliyun_logs_seata-stdout
-              value: stdout
+            - name: aliyun_logs_seata-filelog
+              value: /root/logs/seata/seata-server.*.all.log
             ######### 日志保留时间，只对单个logstore生效 ###########
-            - name: aliyun_logs_seata-stdout_ttl
+            - name: aliyun_logs_seata-filelog_ttl
               value: "1"
             ######### 日志分区数，只对单个logstore生效 ###########
-            - name: aliyun_logs_seata-stdout_shard
+            - name: aliyun_logs_seata-filelog_shard
               value: "1"
           ports:
             - name: http
@@ -70,7 +70,7 @@ data:
     config {
       type = "file"
       file {
-          name = "file.conf"
+          name = "/root/seata-config/file.conf"
       }
     }
 

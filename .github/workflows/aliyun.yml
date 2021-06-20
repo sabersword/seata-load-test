@@ -69,6 +69,7 @@ jobs:
       - name: deploy the image to the ACK cluster
         run: |-
           cd $KUSTOMIZATION_PATH
+          kubectl get pods | awk 'NR==1 {next} {print $1}'|xargs kubectl delete pods
           kubectl apply -k .
           kubectl rollout status deployment/$ACK_DEPLOYMENT_NAME
           kubectl get services -o wide

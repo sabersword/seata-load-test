@@ -12,7 +12,7 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @GetMapping(value = "/deduct")
+    @GetMapping(value = "/accountDeduct")
     public String deduct(String userId, int num) {
         Account account = accountService.deduct(userId, num);
         if (account == null) {

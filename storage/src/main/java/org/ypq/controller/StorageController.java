@@ -15,7 +15,7 @@ public class StorageController {
     @Autowired
     private StorageService storageService;
 
-    @GetMapping(value = "/deduct")
+    @GetMapping(value = "/storageDeduct")
     public String deduct(@RequestParam String commodityCode, @RequestParam Integer num) throws SQLException {
         System.out.println("storage XID " + RootContext.getXID());
         return storageService.deduct(commodityCode, num);

@@ -30,7 +30,7 @@ public class OrderService {
         order.setStatus("NORMAL");
         orderMapper.insert(order);
         String result = "order is [userId:" + userId + "],[commodityCode:" + commodityCode + "],[count:" + count + "]    ";
-        result += restTemplate.getForObject("http://account-service:9773/deduct?userId=" + userId + "&num=" + count, String.class);
+        result += restTemplate.getForObject("http://account-service:9773/accountDeduct?userId=" + userId + "&num=" + count, String.class);
         return result;
     }
 

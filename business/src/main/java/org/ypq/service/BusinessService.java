@@ -13,7 +13,7 @@ public class BusinessService {
 
     @GlobalTransactional
     public String purchase(String userId, String commodityCode, int orderCount) {
-        String result = restTemplate.getForObject("http://storage-service:9771/deduct?commodityCode=" + commodityCode + "&num=" + orderCount, String.class);
+        String result = restTemplate.getForObject("http://storage-service:9771/storageDeduct?commodityCode=" + commodityCode + "&num=" + orderCount, String.class);
         result += restTemplate.getForObject("http://order-service:9772/create?userId=" + userId + "&commodityCode=" + commodityCode + "&num=" + orderCount, String.class);
         if (result.contains("not enough")) {
             throw new RuntimeException("Business out of money");

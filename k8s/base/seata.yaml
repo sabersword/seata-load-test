@@ -20,6 +20,8 @@ spec:
           image: registry-vpc.cn-shenzhen.aliyuncs.com/org-ypq/seata-offical:1.4.2
           imagePullPolicy: Always
           env:
+            - name: SEATA_PORT
+              value: db
             - name: SEATA_CONFIG_NAME
               value: file:/root/seata-config/registry
             ######### 配置 环境变量 命名格式为 aliyun_logs_${logstore名字}_${参数}###########
@@ -70,7 +72,7 @@ data:
     config {
       type = "file"
       file {
-          name = "/root/seata-config/file.conf"
+          name = "file:/root/seata-config/file.conf"
       }
     }
 

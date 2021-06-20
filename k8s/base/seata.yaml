@@ -6,7 +6,7 @@ metadata:
   labels:
     k8s-app: seata-server
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       k8s-app: seata-server
@@ -83,7 +83,7 @@ data:
         datasource = "druid"
         dbType = "mysql"
         driverClassName = "com.mysql.cj.jdbc.Driver"
-        url = "jdbc:mysql://rm-wz98l935wd2020a18.mysql.rds.aliyuncs.com:3306/seata"
+        url = "jdbc:mysql://rm-wz9k19uh61g95rbzz.mysql.rds.aliyuncs.com:3306/seata"
         user = "ypq"
         password = "1qaz@WSX"
         minConn = 5

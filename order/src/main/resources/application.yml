@@ -33,8 +33,8 @@ seata:
     rm:
       async-commit-buffer-limit: 1000
       lock:
-        retry-interval: 100
-        retry-policy-branch-rollback-on-conflict: false
+        retry-interval: 10
+        retry-policy-branch-rollback-on-conflict: true
         retry-times: 30
       report-retry-count: 5
       report-success-enable: false

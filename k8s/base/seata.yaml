@@ -26,7 +26,7 @@ spec:
               value: file:/root/seata-config/registry
             ######### 配置 环境变量 命名格式为 aliyun_logs_${logstore名字}_${参数}###########
             ######### 配置 project，如果使用k8s集群默认的project可以不填 ###########
-            - name: aliyun_logs_seata-stdout_project
+            - name: aliyun_logs_seata-filelog_project
               value: k8s-log-sls
             ######### 配置 机器组，如果使用k8s集群默认的project下的默认机器组可以不填 ###########
             # - name: aliyun_logs_provider-stdout_machinegroup
